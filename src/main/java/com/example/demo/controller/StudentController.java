@@ -1,0 +1,47 @@
+package com.example.demo.controller;
+
+import com.example.demo.dao.StudentJdbc;
+import com.example.demo.model.Student;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+public class StudentController {
+
+    private final StudentJdbc studentJdbc;
+
+    public StudentController(StudentJdbc studentJdbc) {
+        this.studentJdbc = studentJdbc;
+    }
+
+    @GetMapping("/students")
+    public List<Student> getStudents() {
+        return studentJdbc.getAll();
+    }
+
+    @GetMapping("/students/{id}")
+    public Student getStudent(@PathVariable int id) {
+        return studentJdbc.get(id);
+    }
+
+    @GetMapping("/students/study_group/{studyGroupId}")
+    public List<Student> getStudentByStudyGroup(@PathVariable int studyGroupId) {
+        return studentJdbc.getAllByStudyGroup(studyGroupId);
+    }
+
+    @PostMapping(path = "/students", consumes = "application/json", produces = "application/json")
+    public void addStudent(@RequestBody Student student) {
+        studentJdbc.create(student);
+    }
+
+    @PutMapping("/students/{id}")
+    public void updateStudent(@PathVariable int id, @RequestBody Student student) {
+        studentJdbc.update(id, student);
+    }
+
+    @DeleteMapping("/students/{id}")
+    public void deleteStudent(@PathVariable int id) {
+        studentJdbc.delete(id);
+    }
+}
