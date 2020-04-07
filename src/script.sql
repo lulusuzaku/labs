@@ -1,6 +1,6 @@
 CREATE TABLE exam_type
 (
-    id   INT  NOT NULL,
+    id   INT  NOT NULL AUTO_INCREMENT,
     type TEXT NULL
 );
 
@@ -9,7 +9,7 @@ ALTER TABLE exam_type
 
 CREATE TABLE journal
 (
-    id            INT NOT NULL,
+    id            INT NOT NULL AUTO_INCREMENT,
     study_plan_id INT NOT NULL,
     mark_id       INT NOT NULL,
     student_id    INT NOT NULL,
@@ -22,7 +22,7 @@ ALTER TABLE journal
 
 CREATE TABLE mark
 (
-    id    INT  NOT NULL,
+    id    INT  NOT NULL AUTO_INCREMENT,
     name  TEXT NULL,
     value TEXT NULL
 );
@@ -32,7 +32,7 @@ ALTER TABLE mark
 
 CREATE TABLE student
 (
-    id             INT  NOT NULL,
+    id             INT  NOT NULL AUTO_INCREMENT,
     study_group_id INT  NOT NULL,
     surname        TEXT NULL,
     name           TEXT NULL,
@@ -44,7 +44,7 @@ ALTER TABLE student
 
 CREATE TABLE study_group
 (
-    id   INT  NOT NULL,
+    id   INT  NOT NULL AUTO_INCREMENT,
     name TEXT NULL
 );
 
@@ -53,7 +53,7 @@ ALTER TABLE study_group
 
 CREATE TABLE study_plan
 (
-    id           INT NOT NULL,
+    id           INT NOT NULL AUTO_INCREMENT,
     exam_type_id INT NOT NULL,
     subject_id   INT NOT NULL
 );
@@ -63,7 +63,7 @@ ALTER TABLE study_plan
 
 CREATE TABLE subject
 (
-    id         INT  NOT NULL,
+    id         INT  NOT NULL AUTO_INCREMENT,
     name       TEXT NULL,
     short_name TEXT NULL
 );

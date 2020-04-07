@@ -27,7 +27,7 @@ public class JournalRecordJdbc {
         Map<String, Object> parameters = new HashMap<>();
 
         parameters.put("id", journalRecord.getId());
-        parameters.put("student_id", journalRecord.getMark_id());
+        parameters.put("student_id", journalRecord.getStudent_id());
         parameters.put("study_plan_id", journalRecord.getStudy_plan_id());
         parameters.put("in_time", journalRecord.isIn_time());
         parameters.put("count", journalRecord.getCount());
