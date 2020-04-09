@@ -43,7 +43,7 @@ CREATE TABLE journal
     id INT AUTO_INCREMENT NOT NULL,
     study_plan_id INT NOT NULL,
     mark_id INT NOT NULL,
-    journal_id INT NOT NULL,
+    student_id INT NOT NULL,
     count INT NULL,
     in_time BIT NULL,
     PRIMARY KEY (id)
@@ -58,7 +58,7 @@ CREATE TABLE mark
 );
 
 ALTER TABLE journal
-    ADD CONSTRAINT R_1 FOREIGN KEY (journal_id) REFERENCES student (id);
+    ADD CONSTRAINT R_1 FOREIGN KEY (student_id) REFERENCES student (id);
 
 ALTER TABLE journal
     ADD CONSTRAINT R_2 FOREIGN KEY (mark_id) REFERENCES mark (id);
