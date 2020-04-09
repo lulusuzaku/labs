@@ -1,7 +1,6 @@
 package com.example.demo.model;
 
 public class Mark {
-
     private int id;
     private String name;
     private String value;
@@ -36,4 +35,5 @@ public class Mark {
         this.value = value;
     }
 }
+
 

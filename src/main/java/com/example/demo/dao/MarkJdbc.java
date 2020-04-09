@@ -10,26 +10,26 @@ import java.util.List;
 
 @Repository
 public class MarkJdbc {
-
     private final JdbcTemplate jdbcTemplate;
 
     public MarkJdbc(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public Mark get(int id) {
-        return jdbcTemplate.queryForObject(
-                "SELECT * FROM mark WHERE id = ?",
-                this::mapMark,
-                id
-        );
+    public Mark get(int id){
+        return jdbcTemplate.queryForObject("SELECT * FROM mark WHERE id = ?", this::mapMark, id);
     }
 
     private Mark mapMark(ResultSet rs, int i) throws SQLException {
-        return new Mark(
+        Mark mark = new Mark (
                 rs.getInt("id"),
                 rs.getString("name"),
                 rs.getString("value")
         );
+        return mark;
+    }
+
+    public Mark search(String mark) {
+        return jdbcTemplate.queryForObject("SELECT * FROM mark WHERE name = ?", Mark.class, mark);
     }
 }
