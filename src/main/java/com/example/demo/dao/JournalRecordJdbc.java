@@ -20,34 +20,38 @@ public class JournalRecordJdbc {
 
     public JournalRecordJdbc(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
-        this.simpleJdbcInsert = new SimpleJdbcInsert(dataSource).withTableName("Journal");
+        this.simpleJdbcInsert = new SimpleJdbcInsert(dataSource)
+                .withTableName("journal")
+                .usingGeneratedKeyColumns("id");
     }
 
-    public void create(JournalRecord journalRecord) {
+    public long create(JournalRecord journalRecord) {
         Map<String, Object> parameters = new HashMap<>();
-
-        parameters.put("id", journalRecord.getId());
-        parameters.put("student_id", journalRecord.getStudent_id());
-        parameters.put("study_plan_id", journalRecord.getStudy_plan_id());
-        parameters.put("in_time", journalRecord.isIn_time());
+        parameters.put("student_id", journalRecord.getStudentId());
+        parameters.put("study_plan_id", journalRecord.getStudyPlanId());
+        parameters.put("in_time", journalRecord.isInTime());
         parameters.put("count", journalRecord.getCount());
-        parameters.put("mark_id", journalRecord.getMark_id());
+        parameters.put("mark_id", journalRecord.getMarkId());
 
-        simpleJdbcInsert.execute(parameters);
+        return simpleJdbcInsert.executeAndReturnKey(parameters).longValue();
     }
 
     public JournalRecord get(int id) {
         return jdbcTemplate.queryForObject(
                 "SELECT * FROM journal WHERE id = ?",
-                this::mapJournal,
+                this::mapJournalRecord,
                 id
         );
+    }
+
+    public List<JournalRecord> getAll() {
+        return jdbcTemplate.query("SELECT * FROM JOURNAL", this::mapJournalRecord);
     }
 
     public List<JournalRecord> getAllByStudent(int studentId) {
         return jdbcTemplate.query(
                 "SELECT * FROM journal WHERE student_id = ?",
-                this::mapJournal,
+                this::mapJournalRecord,
                 studentId
         );
     }
@@ -57,25 +61,32 @@ public class JournalRecordJdbc {
                 "SELECT journal.id, student_id, study_plan_id, in_time, count, mark_id " +
                         "FROM journal INNER JOIN student ON journal.student_id = student.id " +
                         "WHERE study_group_id = ?",
-                this::mapJournal,
+                this::mapJournalRecord,
                 studyGroupId
         );
     }
 
-    public void update(int id, JournalRecord journalRecord) {
-        jdbcTemplate.update(
+    public int update(int id, JournalRecord journalRecord) {
+        return jdbcTemplate.update(
                 "UPDATE journal SET student_id = ?, study_plan_id = ?, in_time = ?, count = ?, mark_id = ?" +
                         "WHERE id = ?",
-                journalRecord.getStudent_id(),
-                journalRecord.getStudy_plan_id(),
-                journalRecord.isIn_time(),
+                journalRecord.getStudentId(),
+                journalRecord.getStudyPlanId(),
+                journalRecord.isInTime(),
                 journalRecord.getCount(),
-                journalRecord.getMark_id(),
+                journalRecord.getMarkId(),
                 id
         );
     }
 
-    private JournalRecord mapJournal(ResultSet rs, int i) throws SQLException {
+    public int delete(int id) {
+        return jdbcTemplate.update(
+                "DELETE FROM journal WHERE id = ?",
+                id
+        );
+    }
+
+    private JournalRecord mapJournalRecord(ResultSet rs, int i) throws SQLException {
         return new JournalRecord(
                 rs.getInt("id"),
                 rs.getInt("student_id"),
@@ -83,13 +94,6 @@ public class JournalRecordJdbc {
                 rs.getBoolean("in_time"),
                 rs.getInt("count"),
                 rs.getInt("mark_id")
-        );
-    }
-
-    public void delete(int id) {
-        jdbcTemplate.update(
-                "DELETE FROM journal WHERE id = ?",
-                id
         );
     }
 }

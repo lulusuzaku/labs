@@ -6,43 +6,54 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RequestMapping("/journal")
 @RestController
 public class JournalRecordController {
-
     private final JournalRecordJdbc journalRecordJdbc;
 
     public JournalRecordController(JournalRecordJdbc journalRecordJdbc) {
         this.journalRecordJdbc = journalRecordJdbc;
     }
 
-    @GetMapping("/journal/{id}")
+    //Просмотр записи по ID
+    @GetMapping("/{id}")
     public JournalRecord getJournalRecord(@PathVariable int id) {
         return journalRecordJdbc.get(id);
     }
 
-    @GetMapping("/journal/student/{studentId}")
+    //Просмотр всех записей
+    @GetMapping
+    public List<JournalRecord> getAll() {
+        return journalRecordJdbc.getAll();
+    }
+
+    //Просмотр записей по студенту
+    @GetMapping("/student/{studentId}")
     public List<JournalRecord> getJournalRecordsByStudent(@PathVariable int studentId) {
         return journalRecordJdbc.getAllByStudent(studentId);
     }
 
-    @GetMapping("/journal/study_group/{studyGroupId}")
+    //Просмотр записей по группе
+    @GetMapping("/study-group/{studyGroupId}")
     public List<JournalRecord> getJournalRecordsByStudyGroup(@PathVariable int studyGroupId) {
         return journalRecordJdbc.getAllByStudyGroup(studyGroupId);
     }
 
-    @PostMapping(path = "/journal", consumes = "application/json", produces = "application/json")
-    public void addJournalRecord(@RequestBody JournalRecord journalRecord) {
-        journalRecordJdbc.create(journalRecord);
+    //Добавление записи
+    @PostMapping
+    public long addJournalRecord(@RequestBody JournalRecord journalRecord) {
+        return journalRecordJdbc.create(journalRecord);
     }
 
-    @PutMapping("/journal/{id}")
-    public void updateJournalRecord(@PathVariable int id, @RequestBody JournalRecord journalRecord) {
-        journalRecordJdbc.update(id, journalRecord);
+    //Редактирование записи по ID
+    @PutMapping("/{id}")
+    public int updateJournalRecord(@PathVariable int id, @RequestBody JournalRecord journalRecord) {
+        return journalRecordJdbc.update(id, journalRecord);
     }
 
-    @DeleteMapping("/journal/{id}")
-    public void deleteJournalRecord(@PathVariable int id) {
-        journalRecordJdbc.delete(id);
+    //Удаление записи по ID
+    @DeleteMapping("/{id}")
+    public int deleteJournalRecord(@PathVariable int id) {
+        return journalRecordJdbc.delete(id);
     }
 }
-

@@ -1,21 +1,20 @@
 package com.example.demo.model;
 
 public class JournalRecord {
-
     private int id;
-    private int student_id;
-    private int study_plan_id;
-    private boolean in_time;
+    private int studentId;
+    private int studyPlanId;
+    private boolean inTime;
     private int count;
-    private int mark_id;
+    private int markId;
 
-    public JournalRecord(int id, int student_id, int study_plan_id, boolean in_time, int count, int mark_id) {
+    public JournalRecord(int id, int studentId, int studyPlanId, boolean inTime, int count, int markId) {
         this.id = id;
-        this.student_id = student_id;
-        this.study_plan_id = study_plan_id;
-        this.in_time = in_time;
+        this.studentId = studentId;
+        this.studyPlanId = studyPlanId;
+        this.inTime = inTime;
         this.count = count;
-        this.mark_id = mark_id;
+        this.markId = markId;
     }
 
     public int getId() {
@@ -26,28 +25,28 @@ public class JournalRecord {
         this.id = id;
     }
 
-    public int getStudent_id() {
-        return student_id;
+    public int getStudentId() {
+        return studentId;
     }
 
-    public void setStudent_id(int student_id) {
-        this.student_id = student_id;
+    public void setStudentId(int studentId) {
+        this.studentId = studentId;
     }
 
-    public int getStudy_plan_id() {
-        return study_plan_id;
+    public int getStudyPlanId() {
+        return studyPlanId;
     }
 
-    public void setStudy_plan_id(int study_plan_id) {
-        this.study_plan_id = study_plan_id;
+    public void setStudyPlanId(int studyPlanId) {
+        this.studyPlanId = studyPlanId;
     }
 
-    public boolean isIn_time() {
-        return in_time;
+    public boolean isInTime() {
+        return inTime;
     }
 
-    public void setIn_time(boolean in_time) {
-        this.in_time = in_time;
+    public void setInTime(boolean inTime) {
+        this.inTime = inTime;
     }
 
     public int getCount() {
@@ -58,14 +57,13 @@ public class JournalRecord {
         this.count = count;
     }
 
-    public int getMark_id() {
-        return mark_id;
+    public int getMarkId() {
+        return markId;
     }
 
-    public void setMark_id(int mark_id) {
-        this.mark_id = mark_id;
+    public void setMarkId(int markId) {
+        this.markId = markId;
     }
 }
-
 
 
