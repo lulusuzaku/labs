@@ -89,6 +89,9 @@ ADD CONSTRAINT R_5 FOREIGN KEY (subject_id) REFERENCES subject (id);
 ALTER TABLE study_plan
 ADD CONSTRAINT R_6 FOREIGN KEY (exam_type_id) REFERENCES exam_type (id);
 
+INSERT INTO journal (id, study_plan_id, mark_id, student_id, count , in_time) VALUES
+(1, 1,1,1,1,true);
+
 INSERT INTO subject (id, name, short_name) VALUES
 (1, 'Проектирование информационных систем', 'ПрИС'),
 (2, 'Системы искусственного интеллекта', 'СИИ'),
@@ -115,7 +118,7 @@ INSERT INTO study_plan (id, subject_id, exam_type_id) VALUES
 (8, 7, 1);
 
 INSERT INTO mark (id, name, value) VALUES
-(1, 'Отлично', 5),
+(1, 'Отлично', 0),
 (2, 'Хорошо', 4),
 (3, 'Удовлетворительно', 3),
 (4, 'Неудовлетворительно', 2),
