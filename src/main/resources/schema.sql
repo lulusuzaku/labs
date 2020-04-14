@@ -122,7 +122,7 @@ INSERT INTO mark (id, name, value) VALUES
 (7, 'Неявка', '');
 
 INSERT INTO study_group (id, name)
-VALUES (2, 'ИКБО-02-16');
+VALUES (1, 'ИКБО-02-16');
 
 INSERT INTO student_local (id, study_group_id, surname, name, second_name)
-VALUES (71717171, 1, 'Очеретная', 'Анна', 'Андреевна');
+VALUES (717172, 1, 'Ocheretnaya', 'Anna', 'Andreevna');
